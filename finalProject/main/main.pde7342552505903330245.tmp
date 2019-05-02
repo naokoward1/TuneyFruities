@@ -1,0 +1,125 @@
+PImage mainMenuImage;
+PImage optionsImage;
+PImage backgroundImage;
+PImage playbackImage; 
+PImage gameModeEndImage;
+PImage pauseFreePlayImage;
+PImage pauseGameModeImage;
+String page;
+int score;
+Button freePlayButton;
+Button gameModeButton;
+Note theNote;
+
+void setup(){
+  surface.setResizable(true);
+  size(1200, 900);
+  mainMenuImage = loadImage("../assets/Screen_Layout/start.png");
+  optionsImage = loadImage("../assets/Screen_Layout/options.png");
+  backgroundImage= loadImage("../assets/Screen_Layout/background.png");
+  playbackImage = loadImage("../assets/Screen_Layout/win.png");
+  gameModeEndImage = loadImage("../assets/Screen_Layout/gameover.png");
+  pauseFreePlayImage = loadImage("../assets/Screen_Layout/pauseFreePlay.png");
+  pauseGameModeImage = loadImage("../assets/Screen_Layout/pauseGameMode.png");
+  mainMenuImage.resize(width, height);
+  optionsImage.resize(width, height);
+  backgroundImage.resize(width, height);
+  playbackImage.resize(width, height);
+  gameModeEndImage.resize(width, height);
+  pauseFreePlayImage.resize(width, height);
+  pauseGameModeImage.resize(width, height);
+  page = "mainMenuPage";
+  freePlayButton = new Button(125, 75, 400, 150);
+  gameModeButton = new Button(650, 75, 400, 150);
+  theNote = new Note(100, 100, 10);
+}
+
+void draw(){
+  if(page == "mainMenuPage"){
+    mainMenu();
+  }
+  else if(page =="optionsPage"){
+    options();
+  }
+  else if(page=="freePlayPage"){
+    freePlay();
+  }
+  else if(page=="gameModePage"){
+    gameMode();
+  }
+  else if(page == "pauseFreePlayPage"){
+    pauseFreePlay();
+  }
+  else if(page == "pauseGameMode"){
+    pauseGameMode();
+  }
+}
+
+void mainMenu(){
+  image(mainMenuImage, 0, 0);
+  translate(10, 20);
+  theNote.spin();
+  theNote.display();
+}
+
+void options(){
+  image(optionsImage, 0, 0);
+  freePlayButton.display();
+  gameModeButton.display();
+  textSize(24);
+  fill(100);
+  text("Free Play", 155, 125);
+  text("Game Mode", 750, 125);
+  fill(0);
+}
+
+void freePlay(){
+  background(100, 100, 20);
+}
+
+void gameMode(){
+  background(10, 10, 200);
+}
+
+void pauseFreePlay(){
+  image(pauseFreePlayImage, 0, 0);
+}
+
+void pauseGameMode(){
+  image(pauseGameModeImage, 0, 0);
+}
+
+void keyPressed(){
+  //if spacebar is pressed
+  if(key==32){
+    if(page=="mainMenuPage"){
+      page = "optionsPage";
+    }
+    else if(page=="freePlayPage"){
+      page = "pauseFreePlayPage";
+    }
+    else if(page=="gameModePage"){
+      page = "pauseGameModePage";
+    } 
+    else if(page=="pauseFreePlayPage"){
+      page = "freePlayPage";
+    }
+    else if(page=="pauseGameModePage"){
+      page = "gameModePage";
+    }
+  }
+  if(key==113){
+    page = "mainMenuPage";
+  }
+}
+
+void mousePressed(){
+  if(page=="optionsPage"){
+    if(freePlayButton.overShape()){
+      page = "freePlayPage";
+    }
+    else if(gameModeButton.overShape()){
+      page = "gameModePage";
+    }
+  }
+}

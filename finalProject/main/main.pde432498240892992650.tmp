@@ -1,0 +1,80 @@
+PImage mainMenuImage;
+PImage optionsImage;
+PImage backgroundImage;
+PImage playbackImage; 
+PImage gameModeEndImage;
+String page;
+int score;
+Button freePlayButton;
+Button gameModeButton;
+
+void setup(){
+  surface.setResizable(true);
+  size(1200, 900);
+  mainMenuImage = loadImage("../assets/Screen_Layout/start.png");
+  optionsImage = loadImage("../assets/Screen_Layout/options.png");
+  backgroundImage= loadImage("../assets/Screen_Layout/background.png");
+  playbackImage = loadImage("../assets/Screen_Layout/win.png");
+  gameModeEndImage = loadImage("../assets/Screen_Layout/gameover.png");
+  mainMenuImage.resize(width, height);
+  optionsImage.resize(width, height);
+  backgroundImage.resize(width, height);
+  playbackImage.resize(width, height);
+  gameModeEndImage.resize(width, height);
+  page = "mainMenu";
+  freePlayButton = new Button(20, 20, 100);
+  gameModeButton = new Button(100, 20, 100);
+}
+
+void draw(){
+  if(page == "mainMenu"){
+    mainMenu();
+  }
+  else if(page =="options"){
+    options();
+  }
+  else if(page=="freePlay"){
+    freePlay();
+  }
+  else if(page=="gameMode"){
+    gameMode();
+  }
+}
+
+void mainMenu(){
+  image(mainMenuImage, 0, 0);
+}
+
+void options(){
+  image(optionsImage, 0, 0);
+  freePlayButton.display();
+  gameModeButton.display();
+}
+
+void freePlay(){
+  background(100, 100, 20);
+}
+
+void gameMode(){
+  background(10, 10, 200);
+}
+
+void keyPressed(){
+  //if spacebar is pressed
+  if(key==32){
+    if(page=="mainMenu"){
+      page = "options";
+    }
+  }
+}
+
+void mousePressed(){
+  if(page=="options"){
+    if(freePlayButton.overShape()){
+      page = "freePlay";
+    }
+    else if(gameModeButton.overShape()){
+      page = "gameMode";
+    }
+  }
+}
