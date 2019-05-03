@@ -37,11 +37,11 @@ void setup()
   
   minim = new Minim(this);
   
-  song = minim.loadFile("hex.mp3", 1024);
+  song = minim.loadFile("marcus_kellis_theme.mp3", 1024);
   song.play();
   beat = new BeatDetect(song.bufferSize(), song.sampleRate());
 
-  beat.setSensitivity(300);  
+  beat.setSensitivity(100);  
   kickSize = snareSize = hatSize = 16;
 
   bl = new BeatListener(beat, song);  
