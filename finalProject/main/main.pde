@@ -105,9 +105,13 @@ void options(){
 
 void freePlay(){
   background(0);
+  strawberry.setPos(50, 200);
   strawberry.display();
+  blueberry.setPos(350, 200);
   blueberry.display();
+  orange.setPos(650, 200);
   orange.display();
+  melon.setPos(950, 200);
   melon.display();
   fill(0, 20, 20);
   playbackButton.display();
