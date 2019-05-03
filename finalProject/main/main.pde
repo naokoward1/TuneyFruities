@@ -59,7 +59,6 @@ void setup(){
   e_key = minim.loadSample("Piano Keys/E.wav");
   g_key = minim.loadSample("Piano Keys/G.wav");
   
-  
   strawberry = new FruitDude(50, 200, "strawberry");
   blueberry = new FruitDude(350, 200, "blueberry");
   orange = new FruitDude(650, 200, "orange");
@@ -160,10 +159,14 @@ void gameMode(){
  textSize(32);
  text("Score", 360, 50);
  
- text("Tuney A", 25, 250);
- text("Tuney B", 25, 500);
- text("Tuney C", 650, 250);
- text("Tuney D", 650, 500);
+ strawberry.setPos(650, 150);
+ strawberry.display();
+ blueberry.setPos(900, 50);
+ blueberry.display();
+ orange.setPos(675, 500);
+ orange.display();
+ melon.setPos(900, 400);
+ melon.display();
 }
 
 void pauseFreePlay(){
@@ -231,16 +234,20 @@ void keyPressed(){
   }
   if(page=="gameModePage"){
      if(key == 'd') {
+        strawberry.state = 1;
         c_key.trigger(); 
      } 
      if(key == 'f') {
+        blueberry.state = 1;
         d_key.trigger(); 
      } 
      if(key == 'j') {
+        orange.state = 1;
         e_key.trigger(); 
      }
      if(key == 'k') {
        print("hello");
+        melon.state = 1;
         g_key.trigger(); 
      }
    }
