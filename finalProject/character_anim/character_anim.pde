@@ -8,10 +8,10 @@ void setup(){
   size(1200, 900);
   background(#000000);
  
-  strawberry = new FruitDude(50, 200, "strawberry");
-  blueberry = new FruitDude(350, 200, "blueberry");
-  orange = new FruitDude(650, 200, "orange");
-  melon = new FruitDude(950, 200, "melon");
+  strawberry = new FruitDude(40, 400, "strawberry");
+  blueberry = new FruitDude(340, 400, "blueberry");
+  orange = new FruitDude(640, 400, "orange");
+  melon = new FruitDude(940, 400, "melon");
 }
 
 void draw(){
