@@ -24,7 +24,13 @@ Button gameModeButton;
 Button playbackButton;
 Note theNote;
 
+FruitDude strawberry;
+FruitDude blueberry;
+FruitDude orange;
+FruitDude melon;
+
 void setup(){
+  frameRate(10);
   surface.setResizable(true);
   size(1200, 900);
   mainMenuImage = loadImage("../assets/Screen_Layout/start.png");
@@ -52,6 +58,12 @@ void setup(){
   d_key = minim.loadSample("Piano Keys/D.wav");
   e_key = minim.loadSample("Piano Keys/E.wav");
   g_key = minim.loadSample("Piano Keys/G.wav");
+  
+  
+  strawberry = new FruitDude(50, 200, "strawberry");
+  blueberry = new FruitDude(350, 200, "blueberry");
+  orange = new FruitDude(650, 200, "orange");
+  melon = new FruitDude(950, 200, "melon");
 }
 
 void draw(){
@@ -93,7 +105,12 @@ void options(){
 }
 
 void freePlay(){
-  background(100, 100, 20);
+  background(0);
+  strawberry.display();
+  blueberry.display();
+  orange.display();
+  melon.display();
+  fill(0, 20, 20);
   playbackButton.display();
   playbackButton.textFill();
 }
@@ -194,6 +211,24 @@ void keyPressed(){
   if(key==113){
     page = "mainMenuPage";
   }
+  if(page=="freePlayPage"){
+      if (key == '1'){
+        strawberry.state = 1;
+        c_key.trigger();
+      }
+      else if (key == '2'){
+        blueberry.state = 1;
+        d_key.trigger();
+      }
+      else if (key == '3'){
+        orange.state = 1;
+        e_key.trigger();
+      }
+      else if (key == '4'){
+        melon.state = 1;
+        g_key.trigger();
+      }
+  }
   if(page=="gameModePage"){
      if(key == 'd') {
         c_key.trigger(); 
@@ -205,6 +240,7 @@ void keyPressed(){
         e_key.trigger(); 
      }
      if(key == 'k') {
+       print("hello");
         g_key.trigger(); 
      }
    }
@@ -229,4 +265,11 @@ void mousePressed(){
       playbackMusic();
     }
   }
+}
+
+void keyReleased() {
+  strawberry.state = 0;
+  blueberry.state = 0;
+  orange.state = 0;
+  melon.state = 0;
 }
