@@ -17,11 +17,13 @@ PImage playbackImage;
 PImage gameModeEndImage;
 PImage pauseFreePlayImage;
 PImage pauseGameModeImage;
+PImage pauseGeneralImage;
 String page;
 int score;
 Button freePlayButton;
 Button gameModeButton;
 Button playbackButton;
+Button startButton;
 Note theNote;
 
 FruitDude strawberry;
@@ -38,6 +40,7 @@ void setup(){
   backgroundImage= loadImage("../assets/Screen_Layout/background.png");
   pauseFreePlayImage = loadImage("../assets/Screen_Layout/pauseFreePlay.png");
   pauseGameModeImage = loadImage("../assets/Screen_Layout/pauseGameMode.png");
+  pauseGeneralImage = loadImage("../assets/Screen_Layout/pause_general.png");
   playbackImage = loadImage("../assets/Screen_Layout/win.png");
   gameModeEndImage = loadImage("../assets/Screen_Layout/gameover.png");
   mainMenuImage.resize(width, height);
@@ -47,9 +50,13 @@ void setup(){
   gameModeEndImage.resize(width, height);
   pauseFreePlayImage.resize(width, height);
   pauseGameModeImage.resize(width, height);
-  page = "mainMenuPage";
-  freePlayButton = new Button(125, 75, 400, 150, "Free Play");
-  gameModeButton = new Button(650, 75, 400, 150, "Game Mode");
+  pauseGeneralImage.resize(width, height);
+  page = "freePlayPage";
+  startButton = new Button(width/2 -100, height - 150, 300, 100, "Start");
+  startButton.fillCol = color(234, 77, 79);
+  startButton.textCol = color(255);
+  freePlayButton = new Button(125, height - 175, 400, 75, "Free Play");
+  gameModeButton = new Button(700, height - 175, 400, 75, "Game Mode");
   playbackButton = new Button(width/ 2 - 200, height - 100, 400, 150, "Playback");
   theNote = new Note(100, 100, 10);
   // initialize keys
@@ -91,6 +98,8 @@ void draw(){
 
 void mainMenu(){
   image(mainMenuImage, 0, 0);
+  startButton.display();
+  startButton.textFill();
   theNote.spin();
   theNote.display();
 }
@@ -174,11 +183,13 @@ void gameMode(){
 }
 
 void pauseFreePlay(){
-  image(pauseFreePlayImage, 0, 0);
+  image(pauseGeneralImage, 0, 0);
+  //image(pauseFreePlayImage, 0, 0);
 }
 
 void pauseGameMode(){
-  image(pauseGameModeImage, 0, 0);
+  image(pauseGeneralImage, 0, 0);
+  //image(pauseGameModeImage, 0, 0);
 }
 
 void endFreePlay(){
@@ -199,10 +210,7 @@ void playbackMusic(){
 void keyPressed(){
   //if spacebar is pressed
   if(key==32){
-    if(page=="mainMenuPage"){
-      page = "optionsPage";
-    }
-    else if(page=="freePlayPage"){
+    if(page=="freePlayPage"){
       page = "pauseFreePlayPage";
     }
     else if(page=="gameModePage"){
@@ -219,19 +227,27 @@ void keyPressed(){
     page = "mainMenuPage";
   }
   if(page=="freePlayPage"){
-      if (key == '1'){
+      if (key == 'd'){
         strawberry.state = 1;
+        strokeWeight(20);
+        stroke(200, 100, 100);
+        point(strawberry.x + 100, strawberry.y + 100);
         c_key.trigger();
+        theNote.x = strawberry.x;
+        theNote.y = strawberry.y;
+        print(theNote.x);
+        theNote.spin();
+        theNote.display();
       }
-      else if (key == '2'){
+      else if (key == 'f'){
         blueberry.state = 1;
         d_key.trigger();
       }
-      else if (key == '3'){
+      else if (key == 'j'){
         orange.state = 1;
         e_key.trigger();
       }
-      else if (key == '4'){
+      else if (key == 'k'){
         melon.state = 1;
         g_key.trigger();
       }
@@ -258,6 +274,11 @@ void keyPressed(){
 }   
 
 void mousePressed(){
+  if(page=="mainMenuPage"){
+    if(startButton.overShape()){
+      page="optionsPage";
+    }
+  }
   if(page=="optionsPage"){
     if(freePlayButton.overShape()){
       page = "freePlayPage";

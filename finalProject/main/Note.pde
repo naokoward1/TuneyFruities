@@ -24,8 +24,10 @@ class Note{
     dx += 5;
     dy -= 5;
     rotate(this.angle);
+    tint(255, 0, 0);
     image(theNote, this.x, this.y);
     image(theNote, this.x + 50, this.y);
+    noTint();
     popMatrix();
   }
   

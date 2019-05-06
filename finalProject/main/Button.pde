@@ -3,15 +3,20 @@ class Button{
   int sizeX, sizeY;
   String textString;
   float textStringWidth;
+  color fillCol, textCol;
   Button(int x, int y, int sizeX, int sizeY, String textString){
     this.x = x;
     this.y = y;
     this.sizeX = sizeX;
     this.sizeY = sizeY;
     this.textString = textString;
+    this.fillCol = color(234, 77, 79);
+    this.textCol = color(255);
   }
   void display(){
-    rect(x , y, sizeX, sizeY);
+    noStroke();
+    fill(this.fillCol);
+    rect(x , y, sizeX, sizeY, 10);
   }
   
   boolean overShape(){
@@ -23,9 +28,10 @@ class Button{
   
   void textFill(){
     textSize(24);
-    fill(100);
+    textAlign(CENTER, CENTER);
+    fill(this.textCol);
     textStringWidth = textWidth(textString);
-    text(this.textString, (this.x + this.textStringWidth/2), (this.y + this.sizeY/2));
+    text(this.textString, (this.x + this.sizeX/2), (this.y + this.sizeY/2));
     fill(0);
   }
 }
