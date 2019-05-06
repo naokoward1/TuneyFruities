@@ -18,7 +18,13 @@ Board board;
 Music_Note test_note;
 
 // Input
-int idx = 0;
+int numNotes;
+String[] lines;
+String[] keys;
+int[] times;
+
+// Notes
+Music_Note[] notes;
 
 
 void setup() {
@@ -35,13 +41,25 @@ void setup() {
   board = new Board();
   
   // test notes
-  test_note = new Music_Note("f");
+  test_note = new Music_Note("j");
   
   // input 
-  String[] lines = loadStrings("note_data.txt");
-  //String[] keys = 
+  lines = loadStrings("note_data.txt");
+  keys = new String[lines.length];
+  times = new int[lines.length];
+  numNotes = lines.length - 1;
   
+  for(int i = 0; i < lines.length; i++) {
+   String[] vals = lines[i].split(", "); 
+   keys[i] = vals[0].trim();
+   times[i] = int(vals[1]);
+  }
   
+  // note creation
+  notes = new Music_Note[lines.length];
+  for(int j = 0; j < lines.length; j++) {
+   notes[j] = new Music_Note(keys[j]); 
+  }
 }
 
 void draw() {
@@ -49,7 +67,14 @@ void draw() {
  board.display();
  
  // Test Note
- test_note.display();
+ 
+ // All Notes
+ for(int k = 0; k < lines.length; k++) {
+  if(millis() > times[k] && notes[k].getY() < 800) {
+   notes[k].display(); 
+   //println(notes[k].getNote());
+   }
+  }
  }
 
 
