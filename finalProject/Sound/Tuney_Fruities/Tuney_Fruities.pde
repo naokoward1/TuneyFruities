@@ -69,7 +69,7 @@ void draw() {
  board.display();
  
  // Test Note
- if(millis() > 4500){
+ if(millis() > 4400){
   mii.play(); 
  }
  
