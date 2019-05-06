@@ -8,10 +8,11 @@ import ddf.minim.ugens.*;
 
 // Keys that play respective piano sounds
 Minim minim;
-AudioSample c_key;
-AudioSample d_key;
-AudioSample e_key;
-AudioSample g_key;
+//AudioSample c_key;
+//AudioSample d_key;
+//AudioSample e_key;
+//AudioSample g_key;
+AudioPlayer mii;
 
 // Note Testing
 Board board;
@@ -31,17 +32,18 @@ void setup() {
   size(800, 800);
   minim = new Minim(this);
   
-  // initialize keys
-  c_key = minim.loadSample("Piano Keys/C.wav");
-  d_key = minim.loadSample("Piano Keys/D.wav");
-  e_key = minim.loadSample("Piano Keys/E.wav");
-  g_key = minim.loadSample("Piano Keys/G.wav");
+  // initialize sounds
+  //c_key = minim.loadSample("Piano Keys/C.wav");
+  //d_key = minim.loadSample("Piano Keys/D.wav");
+  //e_key = minim.loadSample("Piano Keys/E.wav");
+  //g_key = minim.loadSample("Piano Keys/G.wav");
+  mii = minim.loadFile("Song/mii.mp3");
   
   // draw board
   board = new Board();
   
   // test notes
-  test_note = new Music_Note("j");
+  //test_note = new Music_Note("j");
   
   // input 
   lines = loadStrings("note_data.txt");
@@ -67,6 +69,9 @@ void draw() {
  board.display();
  
  // Test Note
+ if(millis() > 4500){
+  mii.play(); 
+ }
  
  // All Notes
  for(int k = 0; k < lines.length; k++) {
@@ -81,7 +86,7 @@ void draw() {
 // keyboard input for music
 // trigger function plays sound sample
 void keyPressed(){
- if(key == 'd') {
+ /*if(key == 'd') {
   c_key.trigger(); 
  }
  
@@ -95,7 +100,7 @@ void keyPressed(){
  
  if(key == 'k') {
   g_key.trigger(); 
- }
+ }*/
  
  
 }
