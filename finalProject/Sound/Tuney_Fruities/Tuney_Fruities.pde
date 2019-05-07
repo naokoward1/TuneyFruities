@@ -77,6 +77,9 @@ void draw() {
  for(int k = 0; k < lines.length; k++) {
   if(millis() > times[k] && notes[k].getY() < 800) {
    notes[k].display(); 
+   if(notes[k].getHit() == true) {
+    board.scoreUp(100); 
+   }
    //println(notes[k].getNote());
    }
   }

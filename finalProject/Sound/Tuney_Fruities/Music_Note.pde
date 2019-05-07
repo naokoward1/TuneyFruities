@@ -44,9 +44,27 @@ class Music_Note {
    rect(x, y, 100, 100);  
   }
   this.y += 5;
-  if(y > 680 && y < 820 && keyPressed && key == 'd') {
+  
+  if(y > 680 && y < 820 && keyPressed && key == 'd' && x == 200) {
    this.hit = true;
   }
+  
+  if(y > 680 && y < 820 && keyPressed && key == 'f' && x == 300) {
+   this.hit = true;
+  }
+  
+  if(y > 680 && y < 820 && keyPressed && key == 'j' && x == 400) {
+   this.hit = true;
+  }
+  
+  if(y > 680 && y < 820 && keyPressed && key == 'k' && x == 500) {
+   this.hit = true;
+  }
+  
+  if(hit == true) {
+   this.c = color(255, 255, 255); 
+  }
+  
  }
  
  

@@ -1,5 +1,6 @@
 class Board {
- 
+ int score = 0;
+  
   Board() { 
   }
   
@@ -49,8 +50,12 @@ class Board {
      
      fill(255);
      textSize(32);
-     text("Score", 360, 50); 
-    
+     textAlign(CENTER);
+     text(str(this.score), 400, 50); 
+  }
+  
+  void scoreUp(int s) {
+   this.score += s; 
   }
   
 }
