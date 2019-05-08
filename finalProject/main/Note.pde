@@ -9,7 +9,7 @@ class Note{
   Note(float x, float y, String col){
     this.x = x;
     this.y = y;
-    theNote = loadImage("../assets/musicNote2.png");
+    theNote = loadImage("../assets/musicNote.png");
     theGlowString = "../assets/assets/"+ col + "_note_glow.png";
     theGlow = loadImage(theGlowString);
     this.origW = theNote.width/4;
@@ -27,7 +27,7 @@ class Note{
   }   
   
   void move(){
-    this.x += 15;
+    this.x += 5;
     if(this.x < 50 || this.x > width - 190){
       this.x = 100;
     }
@@ -49,11 +49,11 @@ class Note{
   }
 
   void pulseOut() {
-    this.w_note += 2;
-    this.h_note += 2;
+    this.w_note += 1;
+    this.h_note += 1;
   }
   void pulseIn() {
-    this.w_note -= 2;
-    this.h_note -= 2;
+    this.w_note -= 1;
+    this.h_note -= 1;
   } 
 }

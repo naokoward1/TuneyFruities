@@ -26,6 +26,7 @@ Button gameModeButton;
 Button playbackButton;
 Button startButton;
 Note[] theNotes = new Note[4];
+Note[] theNotesFreePlay = new Note[4];
 String[] theColors = new String[4];
 float note_w, note_h;
 boolean grow = true;
@@ -51,8 +52,10 @@ int[] times;
 Music_Note[] notes;
 int startTime = 0;
 
+boolean songEnd;
+
 void setup(){
-  frameRate(10);
+  //frameRate(10);
   surface.setResizable(true);
   size(1200, 900);
   mainMenuImage = loadImage("../assets/Screen_Layout/start.png");
@@ -75,14 +78,17 @@ void setup(){
   startButton = new Button(width/2 -100, height - 150, 300, 100, "Start");
   startButton.fillCol = color(234, 77, 79);
   startButton.textCol = color(255);
-  freePlayButton = new Button(125, height - 175, 400, 75, "Free Play");
-  gameModeButton = new Button(700, height - 175, 400, 75, "Game Mode");
+  freePlayButton = new Button(125, height/2 - 20, 400, 75, "Free Play");
+  gameModeButton = new Button(700, height/2 - 20, 400, 75, "Game Mode");
   playbackButton = new Button(width/ 2 - 200, height - 100, 400, 150, "Playback");
   String[] theColors = {"red", "blue", "orange", "green"};  
   
   //create note array
   for(int i = 0; i < theColors.length; i++){
     theNotes[i] = new Note(i*275, height - 250, theColors[i]);
+  }
+  for(int i = 0; i < theColors.length; i++){
+    theNotesFreePlay[i] = new Note(i*275, 50, theColors[i]);
   }
   // initialize music
   minim = new Minim(this);
@@ -140,8 +146,8 @@ void draw(){
   else if(page == "pauseGameModePage"){
     pauseGameMode();
   }
-  else if(page == "playbackPage"){
-    endFreePlay();
+  else if(page == "endGameMode"){
+    endGameMode();
   }
 }
 
@@ -160,7 +166,7 @@ void options(){
 }
 
 void freePlay(){
-  background(0);
+  image(backgroundImage, 0, 0);
   strawberry.setPos(50, 200);
   strawberry.display();
   blueberry.setPos(350, 200);
@@ -170,8 +176,11 @@ void freePlay(){
   melon.setPos(950, 200);
   melon.display();
   fill(0, 20, 20);
-  //playbackButton.display();
-  //playbackButton.textFill();
+    for(int j = 0; j < 4; j++){
+    theNotesFreePlay[j].update();
+    theNotesFreePlay[j].move();
+    theNotesFreePlay[j].display();
+  }
 }
 
 void gameMode(){
@@ -192,7 +201,7 @@ void gameMode(){
   melon.setPos(900, 400);
   melon.display();
   
-  frameRate(60);
+  //frameRate(60);
   
   if(millis() - startTime > 4400) {
    mii.play();
@@ -202,9 +211,13 @@ void gameMode(){
    if(millis() - startTime > times[k] && notes[k].getX() < 1120) {
     notes[k].display();
     if(notes[k].getHit() == true) {
+     notes[k].glow = true;
      board.scoreUp(100);
     }
    }
+  }
+  if(songEnd){
+    page = "endGamePlay";
   }
 }
 
@@ -218,7 +231,6 @@ void pauseFreePlay(){
 }
 
 void pauseGameMode(){
-  frameRate(10);
   image(pauseGeneralImage, 0, 0);
   for(int j = 0; j < 4; j++){
     theNotes[j].update();
@@ -227,7 +239,7 @@ void pauseGameMode(){
   }
 }
 
-void endFreePlay(){
+void endGameMode(){
   image(playbackImage, 0, 0);
   playbackButton.display(); 
 }

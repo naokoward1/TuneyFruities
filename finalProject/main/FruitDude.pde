@@ -1,7 +1,9 @@
 class FruitDude {
   float x, y;
-  
   // animation control
+  int animationTimer = 0;
+  int animationTimerValue = 150;
+  int curFrame = 0;
   int state = 0;                                     // 0 = idle, 1 = sing
   int frame = 0;
   int numFrames = 4;
@@ -28,17 +30,25 @@ class FruitDude {
     
     // assign frame and state
     this.state = 0;
-    this.frame = 0;
+    this.animationTimer = 0;
+    this.animationTimerValue = 150;
+    this.curFrame = 0;
   }
   
   void display(){
-    frame = frameCount % numFrames;
-    
+    //frame = frameCount % numFrames;
+    if((millis() - this.animationTimer) >= this.animationTimerValue){
+      this.curFrame = this.curFrame + 1;
+      this.animationTimer = millis();
+      if(this.curFrame>3){
+        this.curFrame = 0;
+      }
+    }    
     if (state == 0){
-      image(idle_animation[frame], x, y);
+      image(idle_animation[this.curFrame], x, y);
     }
     else if (state == 1){
-      image(sing_animation[frame], x, y);
+      image(sing_animation[this.curFrame], x, y);
     }
   }
   
