@@ -184,7 +184,6 @@ void freePlay(){
 
 void gameMode(){
   background(0);
-  
   if (startTime == 0) {
    startTime = int(millis());
    println(startTime);
@@ -205,7 +204,12 @@ void gameMode(){
   if(millis() - startTime > 4400) {
    mii.play();
   }
-  
+  int notesLen = notes.length -1;
+  println(notes[notesLen].getX());
+  if(notes[notesLen].getX() > 1120){
+    delay(3000);
+    page = "endGameModePage";
+  }
   for(int k = 0; k < lines.length; k++) {
    if(millis() - startTime > times[k] && notes[k].getX() < 1120) {
     notes[k].display();
