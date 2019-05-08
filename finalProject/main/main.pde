@@ -119,6 +119,9 @@ void setup(){
 }
 
 void draw(){
+  if(page != "gameModePage"){
+    mii.pause();
+  }
   if(page == "mainMenuPage"){
     mainMenu();
   }
@@ -215,13 +218,13 @@ void pauseFreePlay(){
 }
 
 void pauseGameMode(){
+  frameRate(10);
   image(pauseGeneralImage, 0, 0);
   for(int j = 0; j < 4; j++){
     theNotes[j].update();
     theNotes[j].move();
     theNotes[j].display();
   }
-  //image(pauseGameModeImage, 0, 0);
 }
 
 void endFreePlay(){
@@ -242,7 +245,10 @@ void playbackMusic(){
 void keyPressed(){
   //if spacebar is pressed
   if(key==32){
-    if(page=="freePlayPage"){
+    if(page=="mainMenuPage"){
+      page = "optionsPage";
+    }
+    else if(page=="freePlayPage"){
       page = "pauseFreePlayPage";
     }
     else if(page=="gameModePage"){
