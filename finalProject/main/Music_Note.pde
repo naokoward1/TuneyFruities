@@ -7,27 +7,26 @@ class Music_Note {
  int ind;
  boolean hit;
  PImage[] colors = new PImage[4];
+ PImage[] glowColors = new PImage[4];
  String[] keys  = new String[4];
  int[] pos = new int[4];
  PImage red;
- PImage red_press;
  PImage green;
- PImage green_press;
  PImage blue;
- PImage blue_press;
  PImage orange;
- PImage orange_press;
+ PImage redGlow, greenGlow, blueGlow, orangeGlow;
+ boolean glow;
+ 
  
  Music_Note(String note) {
-   red = loadImage("assets/red_note.png");
-   red_press = loadImage("assets/red_note_glow.png");
-   green = loadImage("assets/green_note.png");
-   green_press = loadImage("assets/green_note_glow.png");
-   blue = loadImage("assets/blue_note.png");
-   blue_press = loadImage("assets/blue_note_glow.png");
-   orange = loadImage("assets/orange_note.png");
-   orange_press = loadImage("assets/orange_note_glow.png");
-   
+   red = loadImage("../assets/assets/red_note.png");
+   green = loadImage("../assets/assets/green_note.png");
+   blue = loadImage("../assets/assets/blue_note.png");
+   orange = loadImage("../assets/assets/orange_note.png");
+   redGlow = loadImage("../assets/assets/red_note_glow.png");
+   greenGlow = loadImage("../assets/assets/green_note_glow.png");
+   blueGlow = loadImage("../assets/assets/blue_note_glow.png");
+   orangeGlow = loadImage("../assets/assets/orange_note_glow.png");
    red.resize(45, 45);
    green.resize(45, 45);
    blue.resize(45, 45);
@@ -36,6 +35,10 @@ class Music_Note {
    colors[1] = blue;
    colors[2] = orange;
    colors[3] = green;
+   glowColors[0] = redGlow;
+   glowColors[1] = blueGlow;
+   glowColors[2] = orangeGlow;
+   glowColors[3] = greenGlow;
    keys[0] = "d";
    keys[1] = "f";
    keys[2] = "j";
@@ -58,7 +61,12 @@ class Music_Note {
  void display() {
   if(this.x < 1120) {
    imageMode(CENTER);
+   if(!glow){
    image(colors[ind], x, y);
+   }
+   else{
+     image(glowColors[ind], x, y);
+   }
    imageMode(CORNER);
   }
   this.x += 8;
