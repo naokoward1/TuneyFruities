@@ -9,6 +9,7 @@ AudioSample c_key;
 AudioSample d_key;
 AudioSample e_key;
 AudioSample g_key;
+AudioPlayer mii;
 
 PImage mainMenuImage;
 PImage optionsImage;
@@ -31,6 +32,21 @@ FruitDude blueberry;
 FruitDude orange;
 FruitDude melon;
 
+// Game Mode BG
+PImage gameModeBG;
+PImage gameBoard;
+Board board;
+
+// Game Mode Input
+int numNotes;
+String[] lines;
+String[] keys;
+int[] times;
+
+// Game Mode Notes
+Music_Note[] notes;
+int startTime = 0;
+
 void setup(){
   frameRate(10);
   surface.setResizable(true);
@@ -51,7 +67,7 @@ void setup(){
   pauseFreePlayImage.resize(width, height);
   pauseGameModeImage.resize(width, height);
   pauseGeneralImage.resize(width, height);
-  page = "freePlayPage";
+  page = "mainMenuPage";
   startButton = new Button(width/2 -100, height - 150, 300, 100, "Start");
   startButton.fillCol = color(234, 77, 79);
   startButton.textCol = color(255);
@@ -59,7 +75,7 @@ void setup(){
   gameModeButton = new Button(700, height - 175, 400, 75, "Game Mode");
   playbackButton = new Button(width/ 2 - 200, height - 100, 400, 150, "Playback");
   theNote = new Note(100, 100, 10);
-  // initialize keys
+  // initialize music
   minim = new Minim(this);
   c_key = minim.loadSample("Piano Keys/C.wav");
   d_key = minim.loadSample("Piano Keys/D.wav");
@@ -70,6 +86,27 @@ void setup(){
   blueberry = new FruitDude(350, 200, "blueberry");
   orange = new FruitDude(650, 200, "orange");
   melon = new FruitDude(950, 200, "melon");
+  
+  // Game Mode
+  // Read in data
+  mii = minim.loadFile("Song/mii.mp3");
+  board = new Board();
+  lines = loadStrings("note_data.txt");
+  keys = new String[lines.length];
+  times = new int[lines.length];
+  numNotes = lines.length - 1;
+  
+  for(int i = 0; i < lines.length; i++) {
+   String[] vals = lines[i].split(", ");
+   keys[i] = vals[0].trim();
+   times[i] = int(vals[1]);
+  }
+  
+  // note creation
+  notes = new Music_Note[lines.length];
+  for(int j = 0; j < lines.length; j++) {
+   notes[j] = new Music_Note(keys[j]); 
+  }
 }
 
 void draw(){
@@ -128,58 +165,37 @@ void freePlay(){
 }
 
 void gameMode(){
-  background(0); 
- // draw board for song mode --
- //base
- fill(255);
- rect(200, 0, 400, 800);
- 
- //color in
- fill(155, 0, 0);
- rect(200, 0, 100, 700);
- fill(0, 0, 155);
- rect(300, 0, 100, 700);
- fill(200, 65, 0);
- rect(400, 0, 100, 700);
- fill(0, 155, 0);
- rect(500, 0, 100, 700);
- 
- //outline
- stroke(255);
- line(300, 0, 300, 800);
- line(400, 0, 400, 800);
- line(500, 0, 500, 800);
- line(200, 700, 600, 700);
- stroke(0);
- line(300, 700, 300, 800);
- line(400, 700, 400, 800);
- line(500, 700, 500, 800);
- 
- //text on hit area
- textSize(64);
- fill(0);
- text("D", 225, 775);
- text("F", 325, 775);
- text("J", 445, 775);
- text("K", 525, 775);
- 
- //text placeholders for "Tuneys"/ Score
- fill(0);
- stroke(255);
- rect(200, 0, 400, 100);
- 
- fill(255);
- textSize(32);
- text("Score", 360, 50);
- 
- strawberry.setPos(650, 150);
- strawberry.display();
- blueberry.setPos(900, 50);
- blueberry.display();
- orange.setPos(675, 500);
- orange.display();
- melon.setPos(900, 400);
- melon.display();
+  background(0);
+  
+  if (startTime == 0) {
+   startTime = int(millis());
+   println(startTime);
+  }
+  board.display();
+  
+  strawberry.setPos(60, 400);
+  strawberry.display();
+  blueberry.setPos(340, 400);
+  blueberry.display();
+  orange.setPos(620, 400);
+  orange.display();
+  melon.setPos(900, 400);
+  melon.display();
+  
+  frameRate(60);
+  
+  if(millis() - startTime > 4400) {
+   mii.play(); 
+  }
+  
+  for(int k = 0; k < lines.length; k++) {
+   if(millis() - startTime > times[k] && notes[k].getX() < 1120) {
+    notes[k].display();
+    if(notes[k].getHit() == true) {
+     board.scoreUp(100); 
+    }
+   }
+  }
 }
 
 void pauseFreePlay(){
@@ -255,20 +271,19 @@ void keyPressed(){
   if(page=="gameModePage"){
      if(key == 'd') {
         strawberry.state = 1;
-        c_key.trigger(); 
+        //c_key.trigger(); 
      } 
      if(key == 'f') {
         blueberry.state = 1;
-        d_key.trigger(); 
+        //d_key.trigger(); 
      } 
      if(key == 'j') {
         orange.state = 1;
-        e_key.trigger(); 
+        //e_key.trigger(); 
      }
      if(key == 'k') {
-       print("hello");
         melon.state = 1;
-        g_key.trigger(); 
+        //g_key.trigger(); 
      }
    }
 }   
