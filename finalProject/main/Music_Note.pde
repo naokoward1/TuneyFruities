@@ -10,24 +10,32 @@ class Music_Note {
  String[] keys  = new String[4];
  int[] pos = new int[4];
  PImage red;
+ PImage red_press;
  PImage green;
+ PImage green_press;
  PImage blue;
+ PImage blue_press;
  PImage orange;
- 
+ PImage orange_press;
  
  Music_Note(String note) {
    red = loadImage("assets/red_note.png");
+   red_press = loadImage("assets/red_note_glow.png");
    green = loadImage("assets/green_note.png");
+   green_press = loadImage("assets/green_note_glow.png");
    blue = loadImage("assets/blue_note.png");
+   blue_press = loadImage("assets/blue_note_glow.png");
    orange = loadImage("assets/orange_note.png");
+   orange_press = loadImage("assets/orange_note_glow.png");
+   
    red.resize(45, 45);
    green.resize(45, 45);
    blue.resize(45, 45);
    orange.resize(45, 45);
    colors[0] = red;
-   colors[1] = green;
-   colors[2] = blue;
-   colors[3] = orange;
+   colors[1] = blue;
+   colors[2] = orange;
+   colors[3] = green;
    keys[0] = "d";
    keys[1] = "f";
    keys[2] = "j";
