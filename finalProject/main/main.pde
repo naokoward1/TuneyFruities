@@ -52,7 +52,7 @@ Music_Note[] notes;
 int startTime = 0;
 
 void setup(){
-  frameRate(10);
+  //frameRate(10);
   surface.setResizable(true);
   size(1200, 900);
   mainMenuImage = loadImage("../assets/Screen_Layout/start.png");
@@ -192,7 +192,7 @@ void gameMode(){
   melon.setPos(900, 400);
   melon.display();
   
-  frameRate(60);
+  //frameRate(60);
   
   if(millis() - startTime > 4400) {
    mii.play();
@@ -202,6 +202,7 @@ void gameMode(){
    if(millis() - startTime > times[k] && notes[k].getX() < 1120) {
     notes[k].display();
     if(notes[k].getHit() == true) {
+     notes[k].glow = true;
      board.scoreUp(100);
     }
    }
@@ -218,7 +219,7 @@ void pauseFreePlay(){
 }
 
 void pauseGameMode(){
-  frameRate(10);
+  //frameRate(10);
   image(pauseGeneralImage, 0, 0);
   for(int j = 0; j < 4; j++){
     theNotes[j].update();
