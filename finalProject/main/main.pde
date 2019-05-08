@@ -19,6 +19,7 @@ PImage gameModeEndImage;
 PImage pauseFreePlayImage;
 PImage pauseGameModeImage;
 PImage pauseGeneralImage;
+PImage scoreImage;
 String page;
 int score;
 Button freePlayButton;
@@ -52,8 +53,6 @@ int[] times;
 Music_Note[] notes;
 int startTime = 0;
 
-boolean songEnd;
-
 void setup(){
   //frameRate(10);
   surface.setResizable(true);
@@ -65,12 +64,12 @@ void setup(){
   pauseGameModeImage = loadImage("../assets/Screen_Layout/pauseGameMode.png");
   pauseGeneralImage = loadImage("../assets/Screen_Layout/pause_general.png");
   playbackImage = loadImage("../assets/Screen_Layout/win.png");
-  gameModeEndImage = loadImage("../assets/Screen_Layout/gameover.png");
+  scoreImage = loadImage("../assets/Screen_Layout/score.png");
   mainMenuImage.resize(width, height);
   optionsImage.resize(width, height);
   backgroundImage.resize(width, height);
   playbackImage.resize(width, height);
-  gameModeEndImage.resize(width, height);
+  scoreImage.resize(width, height);
   pauseFreePlayImage.resize(width, height);
   pauseGameModeImage.resize(width, height);
   pauseGeneralImage.resize(width, height);
@@ -146,7 +145,7 @@ void draw(){
   else if(page == "pauseGameModePage"){
     pauseGameMode();
   }
-  else if(page == "endGameMode"){
+  else if(page == "endGameModePage"){
     endGameMode();
   }
 }
@@ -216,9 +215,6 @@ void gameMode(){
     }
    }
   }
-  if(songEnd){
-    page = "endGamePlay";
-  }
 }
 
 void pauseFreePlay(){
@@ -240,22 +236,19 @@ void pauseGameMode(){
 }
 
 void endGameMode(){
-  image(playbackImage, 0, 0);
-  playbackButton.display(); 
-}
-
-void endGameModegame(){
-  image(gameModeEndImage, 0, 0);
-}
-
-
-//this function plays back the recording
-void playbackMusic(){
-  print("hello");
+  image(scoreImage, 0, 0);
+  fill(0);
+  textSize(32);
+  text(board.score, width/2, height/2);
 }
 
 void keyPressed(){
   //if spacebar is pressed
+  if(page=="gameModePage"){
+    if(key=='a'){
+      page="endGameModePage";
+    }
+  }
   if(key==32){
     if(page=="mainMenuPage"){
       page = "optionsPage";
@@ -329,16 +322,6 @@ void mousePressed(){
     }
     else if(gameModeButton.overShape()){
       page = "gameModePage";
-    }
-  }
-  else if(page=="freePlayPage"){
-    if(playbackButton.overShape()){
-      page = "playbackPage";
-    }
-  }
-  else if(page=="playbackPage"){
-    if(playbackButton.overShape()){
-      playbackMusic();
     }
   }
 }
