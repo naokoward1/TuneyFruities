@@ -1,48 +1,59 @@
 class Note{
-  PImage theNote;
-  float x;
-  float y;
-  float speed;
-  float w_note, h_note;
-  float angle;
-  float angleChange = 0.015;
-  float dx = 10;
-  float dy = 10;
-  Note(float x, float y, float speed){
+  PImage theNote, theGlow;
+  float x, y, w_note, h_note, origW;
+  boolean grow;
+  float dx = 0;
+  String col;
+  String theGlowString;
+
+  Note(float x, float y, String col){
     this.x = x;
     this.y = y;
-    this. speed = speed;
-    theNote = loadImage("../assets/musicNote.png");
-    theNote.resize(20, 0);
-    w_note = theNote.width;
-    h_note = theNote.height;
-    this.angle = 0;
+    theNote = loadImage("../assets/musicNote2.png");
+    theGlowString = "../assets/assets/"+ col + "_note_glow.png";
+    theGlow = loadImage(theGlowString);
+    this.origW = theNote.width/4;
+    this.w_note = theNote.width/4;
+    this.h_note = theNote.height/4;
+    this.grow = true;
   }
-  void display(){
+
+  void display() {
     pushMatrix();
-    translate(dx, dy);
-    dx += 5;
-    dy -= 5;
-    rotate(this.angle);
-    tint(255, 0, 0);
-    image(theNote, this.x, this.y);
-    image(theNote, this.x + 50, this.y);
-    noTint();
+    translate(this.x,this.y);
+    image(theNote, 0, 0, w_note, h_note);
+    image(theGlow, 70, -15, theGlow.width/2, theGlow.height/2);
     popMatrix();
-  }
+  }   
   
-  void spin(){
-    if(this.angle > PI/4 || this.angle < 0){ 
-      angleChange = -angleChange;
+  void move(){
+    this.x += 15;
+    if(this.x < 50 || this.x > width - 190){
+      this.x = 100;
     }
-    this.angle += angleChange;
   }
-  /*
-  void pulse(){
-    theNote.resize(30, 0);
-    image(theNote, this.x, this.y);
-    theNote.resize(20, 0);
-    image(theNote, this.x, this.y);
+
+  void update(){
+    if(this.w_note > this.origW + 20){
+      this.grow = false;
+    }
+    else if(this.w_note < this.origW){
+      this.grow = true;
+    }
+    if(this.grow){
+      pulseOut();
+    }
+    else{
+      pulseIn();
+    }
   }
-  */
+
+  void pulseOut() {
+    this.w_note += 2;
+    this.h_note += 2;
+  }
+  void pulseIn() {
+    this.w_note -= 2;
+    this.h_note -= 2;
+  } 
 }

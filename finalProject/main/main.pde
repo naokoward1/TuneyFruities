@@ -25,7 +25,11 @@ Button freePlayButton;
 Button gameModeButton;
 Button playbackButton;
 Button startButton;
-Note theNote;
+Note[] theNotes = new Note[4];
+String[] theColors = new String[4];
+float note_w, note_h;
+boolean grow = true;
+boolean displayNote;
 
 FruitDude strawberry;
 FruitDude blueberry;
@@ -74,7 +78,12 @@ void setup(){
   freePlayButton = new Button(125, height - 175, 400, 75, "Free Play");
   gameModeButton = new Button(700, height - 175, 400, 75, "Game Mode");
   playbackButton = new Button(width/ 2 - 200, height - 100, 400, 150, "Playback");
-  theNote = new Note(100, 100, 10);
+  String[] theColors = {"red", "blue", "orange", "green"};  
+  
+  //create note array
+  for(int i = 0; i < theColors.length; i++){
+    theNotes[i] = new Note(i*275, height - 250, theColors[i]);
+  }
   // initialize music
   minim = new Minim(this);
   c_key = minim.loadSample("Piano Keys/C.wav");
@@ -137,8 +146,6 @@ void mainMenu(){
   image(mainMenuImage, 0, 0);
   startButton.display();
   startButton.textFill();
-  theNote.spin();
-  theNote.display();
 }
 
 void options(){
@@ -160,8 +167,8 @@ void freePlay(){
   melon.setPos(950, 200);
   melon.display();
   fill(0, 20, 20);
-  playbackButton.display();
-  playbackButton.textFill();
+  //playbackButton.display();
+  //playbackButton.textFill();
 }
 
 void gameMode(){
@@ -185,14 +192,14 @@ void gameMode(){
   frameRate(60);
   
   if(millis() - startTime > 4400) {
-   mii.play(); 
+   mii.play();
   }
   
   for(int k = 0; k < lines.length; k++) {
    if(millis() - startTime > times[k] && notes[k].getX() < 1120) {
     notes[k].display();
     if(notes[k].getHit() == true) {
-     board.scoreUp(100); 
+     board.scoreUp(100);
     }
    }
   }
@@ -200,11 +207,20 @@ void gameMode(){
 
 void pauseFreePlay(){
   image(pauseGeneralImage, 0, 0);
-  //image(pauseFreePlayImage, 0, 0);
+  for(int j = 0; j < 4; j++){
+    theNotes[j].update();
+    theNotes[j].move();
+    theNotes[j].display();
+  }
 }
 
 void pauseGameMode(){
   image(pauseGeneralImage, 0, 0);
+  for(int j = 0; j < 4; j++){
+    theNotes[j].update();
+    theNotes[j].move();
+    theNotes[j].display();
+  }
   //image(pauseGameModeImage, 0, 0);
 }
 
@@ -247,13 +263,8 @@ void keyPressed(){
         strawberry.state = 1;
         strokeWeight(20);
         stroke(200, 100, 100);
-        point(strawberry.x + 100, strawberry.y + 100);
+        displayNote = true;
         c_key.trigger();
-        theNote.x = strawberry.x;
-        theNote.y = strawberry.y;
-        print(theNote.x);
-        theNote.spin();
-        theNote.display();
       }
       else if (key == 'f'){
         blueberry.state = 1;
