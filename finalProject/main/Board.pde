@@ -26,4 +26,8 @@ class Board {
    this.score += s; 
   }
   
+  void resetScore(){
+   this.score = 0; 
+  }
+  
 }

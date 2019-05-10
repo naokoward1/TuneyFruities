@@ -154,6 +154,14 @@ void mainMenu(){
   image(mainMenuImage, 0, 0);
   startButton.display();
   startButton.textFill();
+  for(int i = 0; i < notes.length; i++) {
+   notes[i].setX(100);
+   notes[i].setMiss();
+  }
+  startTime = 0;
+  mii.pause();
+  mii.rewind();
+  board.resetScore();
 }
 
 void options(){
@@ -205,13 +213,12 @@ void gameMode(){
    mii.play();
   }
   int notesLen = notes.length -1;
-  println(notes[notesLen].getX());
   if(notes[notesLen].getX() > 1120){
     delay(3000);
     page = "endGameModePage";
   }
   for(int k = 0; k < lines.length; k++) {
-   if(millis() - startTime > times[k] && notes[k].getX() < 1120) {
+   if(millis() - startTime > times[k] && notes[k].getX() < 1120 && page == "gameModePage") {
     notes[k].display();
     if(notes[k].getHit() == true) {
      notes[k].glow = true;
@@ -232,11 +239,11 @@ void pauseFreePlay(){
 
 void pauseGameMode(){
   image(pauseGeneralImage, 0, 0);
-  for(int j = 0; j < 4; j++){
-    theNotes[j].update();
-    theNotes[j].move();
-    theNotes[j].display();
-  }
+  //for(int j = 0; j < 4; j++){
+    //theNotes[j].update();
+    //theNotes[j].move();
+    //theNotes[j].display();
+  //}
 }
 
 void endGameMode(){
@@ -244,6 +251,13 @@ void endGameMode(){
   fill(0);
   textSize(32);
   text(board.score, width/2, height/2);
+  for(int i = 0; i < notes.length; i++) {
+   notes[i].setX(100);
+   notes[i].setMiss();
+  }
+  startTime = 0;
+  mii.pause();
+  mii.rewind();
 }
 
 void keyPressed(){

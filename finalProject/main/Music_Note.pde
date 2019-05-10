@@ -19,10 +19,10 @@ class Music_Note {
  
  
  Music_Note(String note) {
-   red = loadImage("../assets/assets/red_note.png");
-   green = loadImage("../assets/assets/green_note.png");
-   blue = loadImage("../assets/assets/blue_note.png");
-   orange = loadImage("../assets/assets/orange_note.png");
+   red = loadImage("../assets/assets/red_note_d.png");
+   green = loadImage("../assets/assets/green_note_k.png");
+   blue = loadImage("../assets/assets/blue_note_f.png");
+   orange = loadImage("../assets/assets/orange_note_j.png");
    redGlow = loadImage("../assets/assets/red_note_glow.png");
    greenGlow = loadImage("../assets/assets/green_note_glow.png");
    blueGlow = loadImage("../assets/assets/blue_note_glow.png");
@@ -61,7 +61,7 @@ class Music_Note {
  void display() {
   if(this.x < 1120) {
    imageMode(CENTER);
-   if(!glow){
+   if(!hit){
    image(colors[ind], x, y);
    }
    else{
@@ -87,10 +87,6 @@ class Music_Note {
    this.hit = true;
   }
   
-  if(hit == true) {
-   this.c = color(255, 255, 255); 
-  }
-  
  }
  
  
@@ -104,6 +100,14 @@ class Music_Note {
  
  float getX() {
   return this.x; 
+ }
+ 
+ void setX(float x) {
+  this.x = x; 
+ }
+ 
+ void setMiss() {
+  this.hit = false; 
  }
  
  String getNote() {
