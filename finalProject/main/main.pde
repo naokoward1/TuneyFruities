@@ -96,10 +96,10 @@ void setup(){
   e_key = minim.loadSample("Piano Keys/E.wav");
   g_key = minim.loadSample("Piano Keys/G.wav");
   
-  strawberry = new FruitDude(50, 200, "strawberry");
-  blueberry = new FruitDude(350, 200, "blueberry");
-  orange = new FruitDude(650, 200, "orange");
-  melon = new FruitDude(950, 200, "melon");
+  strawberry = new FruitDude(50, 400, "strawberry");
+  blueberry = new FruitDude(350, 400, "blueberry");
+  orange = new FruitDude(650, 400, "orange");
+  melon = new FruitDude(950, 400, "melon");
   
   // Game Mode
   // Read in data
@@ -174,13 +174,13 @@ void options(){
 
 void freePlay(){
   image(backgroundImage, 0, 0);
-  strawberry.setPos(50, 200);
+  strawberry.setPos(60, 300);
   strawberry.display();
-  blueberry.setPos(350, 200);
+  blueberry.setPos(350, 300);
   blueberry.display();
-  orange.setPos(650, 200);
+  orange.setPos(625, 300);
   orange.display();
-  melon.setPos(950, 200);
+  melon.setPos(910, 300);
   melon.display();
   fill(0, 20, 20);
     for(int j = 0; j < 4; j++){
