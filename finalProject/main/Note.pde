@@ -9,8 +9,8 @@ class Note{
   Note(float x, float y, String col){
     this.x = x;
     this.y = y;
-    theNote = loadImage("../assets/musicNote.png");
-    theGlowString = "../assets/assets/"+ col + "_note_glow.png";
+    theNote = loadImage("assets/Notes/musicNote.png");
+    theGlowString = "assets/Notes/"+ col + "_note_glow.png";
     theGlow = loadImage(theGlowString);
     this.origW = theNote.width/4;
     this.w_note = theNote.width/4;

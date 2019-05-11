@@ -57,14 +57,14 @@ void setup(){
   //frameRate(10);
   surface.setResizable(true);
   size(1200, 900);
-  mainMenuImage = loadImage("../assets/Screen_Layout/start.png");
-  optionsImage = loadImage("../assets/Screen_Layout/options.png");
-  backgroundImage= loadImage("../assets/Screen_Layout/background.png");
-  pauseFreePlayImage = loadImage("../assets/Screen_Layout/pauseFreePlay.png");
-  pauseGameModeImage = loadImage("../assets/Screen_Layout/pauseGameMode.png");
-  pauseGeneralImage = loadImage("../assets/Screen_Layout/pause_general.png");
-  playbackImage = loadImage("../assets/Screen_Layout/win.png");
-  scoreImage = loadImage("../assets/Screen_Layout/score.png");
+  mainMenuImage = loadImage("/assets/Screen_Layout/start.png");
+  optionsImage = loadImage("/assets/Screen_Layout/options.png");
+  backgroundImage= loadImage("/assets/Screen_Layout/background.png");
+  pauseFreePlayImage = loadImage("/assets/Screen_Layout/pauseFreePlay.png");
+  pauseGameModeImage = loadImage("/assets/Screen_Layout/pauseGameMode.png");
+  pauseGeneralImage = loadImage("/assets/Screen_Layout/pause_general.png");
+  playbackImage = loadImage("/assets/Screen_Layout/win.png");
+  scoreImage = loadImage("/assets/Screen_Layout/score.png");
   mainMenuImage.resize(width, height);
   optionsImage.resize(width, height);
   backgroundImage.resize(width, height);
@@ -91,10 +91,10 @@ void setup(){
   }
   // initialize music
   minim = new Minim(this);
-  c_key = minim.loadSample("Piano Keys/C.wav");
-  d_key = minim.loadSample("Piano Keys/D.wav");
-  e_key = minim.loadSample("Piano Keys/E.wav");
-  g_key = minim.loadSample("Piano Keys/G.wav");
+  c_key = minim.loadSample("assets/Piano Keys/C.wav");
+  d_key = minim.loadSample("assets/Piano Keys/D.wav");
+  e_key = minim.loadSample("assets/Piano Keys/E.wav");
+  g_key = minim.loadSample("assets/Piano Keys/G.wav");
   
   strawberry = new FruitDude(50, 400, "strawberry");
   blueberry = new FruitDude(350, 400, "blueberry");
@@ -103,9 +103,9 @@ void setup(){
   
   // Game Mode
   // Read in data
-  mii = minim.loadFile("Song/mii.mp3");
+  mii = minim.loadFile("assets/Song/mii.mp3");
   board = new Board();
-  lines = loadStrings("note_data.txt");
+  lines = loadStrings("assets/note_data.txt");
   keys = new String[lines.length];
   times = new int[lines.length];
   numNotes = lines.length - 1;

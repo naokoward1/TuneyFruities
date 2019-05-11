@@ -19,14 +19,14 @@ class Music_Note {
  
  
  Music_Note(String note) {
-   red = loadImage("../assets/assets/red_note_d.png");
-   green = loadImage("../assets/assets/green_note_k.png");
-   blue = loadImage("../assets/assets/blue_note_f.png");
-   orange = loadImage("../assets/assets/orange_note_j.png");
-   redGlow = loadImage("../assets/assets/red_note_glow.png");
-   greenGlow = loadImage("../assets/assets/green_note_glow.png");
-   blueGlow = loadImage("../assets/assets/blue_note_glow.png");
-   orangeGlow = loadImage("../assets/assets/orange_note_glow.png");
+   red = loadImage("assets/Notes/red_note.png");
+   green = loadImage("assets/Notes/green_note.png");
+   blue = loadImage("assets/Notes/blue_note.png");
+   orange = loadImage("assets/Notes/orange_note.png");
+   redGlow = loadImage("assets/Notes/red_note_glow.png");
+   greenGlow = loadImage("assets/Notes/green_note_glow.png");
+   blueGlow = loadImage("assets/Notes/blue_note_glow.png");
+   orangeGlow = loadImage("assets/Notes/orange_note_glow.png");
    red.resize(45, 45);
    green.resize(45, 45);
    blue.resize(45, 45);

@@ -10,5 +10,8 @@ During free play and game mode, the following keys act as controls:
 	g triggers the melon (g_key)
 
 The mouse allows for screen shifts by clicking the buttons.
+"a" skips to the end screen for the game mode.
 "q" returns to the start screen.
 Space bar pauses and resumes play.
+
+A separate README has been included for the Audio Analysis folder.

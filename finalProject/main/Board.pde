@@ -4,8 +4,8 @@ class Board {
  PImage gameBoard;
   
   Board() { 
-    gameModeBG = loadImage("assets/play_BG.png");
-    gameBoard = loadImage("assets/note_board.png");
+    gameModeBG = loadImage("assets/Screen_Layout/play_BG.png");
+    gameBoard = loadImage("assets/Screen_Layout/note_board.png");
     gameModeBG.resize(1200, 900);
     gameBoard.resize(1000, 200);
   }
