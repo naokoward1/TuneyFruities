@@ -32,6 +32,7 @@ String[] theColors = new String[4];
 float note_w, note_h;
 boolean grow = true;
 boolean displayNote;
+boolean muted = false;
 
 FruitDude strawberry;
 FruitDude blueberry;
@@ -263,8 +264,14 @@ void endGameMode(){
 void keyPressed(){
   //if spacebar is pressed
   if(page=="gameModePage"){
-    if(key=='a'){
-      page="endGameModePage";
+    if(key=='m'){
+      if(!muted){
+        mii.mute();
+      }
+      else{
+        mii.unmute();
+      }
+      muted = !muted;
     }
   }
   if(key==32){

@@ -1,0 +1,32 @@
+The game "Tuney Fruities" is an audio game.
+There are two modes of interactivity: free play, and game mode.
+
+Keyboard and mouse interactivity
+Users press keys 'd', 'f', 'j', and 'k' to output 'c', 'd', 'e', and 'g', respectively.
+The corresponding fruit character is also animated as a result of these key inputs.
+'m' mutes and unmutes during game mode. 
+'a' skips to the end during game mode. 
+'q' returns to the start screen for all screens.
+Various buttons are included to move between screens.
+
+GUI systems
+There is a start screen, an options screen, a game mode screen, and a free play screen. 
+
+Class objects with animation hierarchies
+The note class has animation hierarchy. As the whole system translates across the screen,
+the music note itself pulses, becoming bigger and smaller.
+
+Data input/output
+Game mode takes in user input to display the notes in concord with the Mii song.
+
+Sound
+Sound is outputted during the game mode as players try to click keys in time with the Mii song.
+In addition, 'c', 'd', 'e', and 'g' are outputted, corresponding with the keys pressed.
+'m' mutes and unmutes during game mode.
+
+Waleed did the data input/output and implemented game mode.
+Vanessa drew all the graphics and made it look cohesive.
+Susan made the GUI systems and wrote the note class. 
+
+We were challenged in the hardware. We had planned on using a Featherboard instead of using
+keyboard input, but are still working on this aspect of the project.

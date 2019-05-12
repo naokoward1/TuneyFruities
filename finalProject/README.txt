@@ -11,6 +11,7 @@ During free play and game mode, the following keys act as controls:
 
 The mouse allows for screen shifts by clicking the buttons.
 "a" skips to the end screen for the game mode.
+"m" mutes and unmutes during game mode. 
 "q" returns to the start screen.
 Space bar pauses and resumes play.
 
